@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+export interface CsvData {
+  ID: string;
+  Tittel: string;
+  Navn: string;
+  Versjon: number;
+  Pris: number;
+  Tall: number;
+}
+
 export function useFetchCSVData() {
-  const [csvData, setCsvData] = useState([]);
+  const [csvData, setCsvData] = useState<CsvData[]>([]);
 
   useEffect(() => {
     fetchCSVData();
@@ -24,18 +33,48 @@ export function useFetchCSVData() {
       });
   };
 
-  function parseCSV(csvText) {
-    const rows = csvText.split(/\r?\n/); // Use a regular expression to split the CSV text into rows while handling '\r'
-    const headers = rows[0].split(","); // Extract headers (assumes the first row is the header row)
-    const data = []; // Initialize an array to store the parsed data
+  function parseCSV(csvText: string): CsvData[] {
+    const rows = csvText.split(/\r?\n/);
+    const headers = rows[0].split(",");
+    const data: CsvData[] = [];
+
     for (let i = 1; i < rows.length; i++) {
-      const rowData = rows[i].split(","); // Use the regular expression to split the row while handling '\r'
-      const rowObject = {};
+      const rowData = rows[i].split(",");
+      const rowObject: CsvData = {
+        ID: "",
+        Tittel: "",
+        Navn: "",
+        Versjon: 0,
+        Pris: 0,
+        Tall: 0,
+      };
+
       for (let j = 0; j < headers.length; j++) {
-        rowObject[headers[j]] = rowData[j];
+        switch (headers[j]) {
+          case "ID":
+            rowObject.ID = rowData[j];
+            break;
+          case "Tittel":
+            rowObject.Tittel = rowData[j];
+            break;
+          case "Navn":
+            rowObject.Navn = rowData[j];
+            break;
+          case "Versjon":
+            rowObject.Versjon = Number(rowData[j]);
+            break;
+          case "Pris":
+            rowObject.Pris = Number(rowData[j]);
+            break;
+          case "Tall":
+            rowObject.Tall = Number(rowData[j]);
+            break;
+        }
       }
+
       data.push(rowObject);
     }
+
     return data;
   }
   console.log(csvData);

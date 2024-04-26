@@ -1,8 +1,8 @@
 import "./App.css";
-import { useFetchCSVData } from "./Datafetcher";
+import { useFetchCSVData, CsvData } from "./Datafetcher";
 
 function App() {
-  const csvData = useFetchCSVData();
+  const csvData: CsvData[] = useFetchCSVData();
   const sortedCsvData = [...csvData].sort((a, b) => b.Versjon - a.Versjon);
 
   return (
