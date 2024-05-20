@@ -1,5 +1,7 @@
 import "./App.css";
 import { useFetchCSVData, CsvData } from "./Datafetcher";
+import Footer from "./Footer";
+import Header from "./Header";
 
 function App() {
   const csvData: CsvData[] = useFetchCSVData();
@@ -7,6 +9,8 @@ function App() {
 
   return (
     <>
+      {/* TODO: Få inn et grid-system her */}
+      <Header />
       {sortedCsvData.map((data, index) => (
         <div key={index}>
           <p>ID: {data.ID}</p>
@@ -18,6 +22,7 @@ function App() {
           <p>-----</p>
         </div>
       ))}
+      <Footer/>
     </>
   );
 }
