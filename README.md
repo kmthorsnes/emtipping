@@ -77,3 +77,4 @@ export default {
 
 
 [link](https://dev.to/mursalfk/effortless-data-management-connecting-google-sheets-to-your-reactjs-project-n96)
+https://docs.google.com/spreadsheets/d/e/2PACX-1vScEnNg6slwAkrrFsxgtrUKdQSjKWsxRirJyFEOfo1HaKCzNb2KbtUKiKkvZtEY7PlXo-_5tIxPF958/pub?gid=766248074&single=true&output=csv
