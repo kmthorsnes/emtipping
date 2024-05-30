@@ -24,9 +24,8 @@ const parseCSV = (csvText: string): CsvData[] => {
         // Don't parse string fields
         rowObject[headers[j] as keyof CsvData] = rowData[j];
       } else {
-        // Replace all commas with periods before parsing number fields
-        const numberData = rowData[j].replace(/,/g, ".");
-        rowObject[headers[j] as keyof CsvData] = parseFloat(numberData);
+        // Parse number fields
+        rowObject[headers[j] as keyof CsvData] = parseFloat(rowData[j]);
       }
     }
     data.push(rowObject);
