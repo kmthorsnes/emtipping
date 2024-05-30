@@ -12,24 +12,17 @@ export interface CsvData {
 
 const parseCSV = (csvText: string): CsvData[] => {
   const rows = csvText.split(/\r?\n/);
-  const headers = rows[0].split(",");
-  const data: CsvData[] = [];
-  for (let i = 1; i < rows.length; i++) {
-    const rowData = rows[i].split(",");
-    const rowObject = {} as CsvData;
-    for (let j = 0; j < headers.length; j++) {
-      if (headers[j] === "SpillerID") {
-        rowObject[headers[j] as keyof CsvData] = Number(rowData[j]);
-      } else if (headers[j] === "Spillernavn") {
-        // Don't parse string fields
-        rowObject[headers[j] as keyof CsvData] = rowData[j];
-      } else {
-        // Parse number fields
-        rowObject[headers[j] as keyof CsvData] = parseFloat(rowData[j]);
+  const headers = rows[0].split(",") as Array<keyof CsvData>;
+
+  const data = rows.slice(1).map((row) =>
+    row.split(",").reduce((a, v, i) => {
+      const key = headers[i];
+      if (key === "Spillernavn") {
+        return { ...a, [key]: v };
       }
-    }
-    data.push(rowObject);
-  }
+      return { ...a, [key]: Number(v) };
+    }, {} as CsvData)
+  );
   return data;
 };
 
@@ -46,7 +39,6 @@ export const useFetchCSVData = (): CsvData[] => {
         .then((response) => {
           const parsedCsvData = parseCSV(response.data);
           setCsvData(parsedCsvData);
-          console.log(parsedCsvData);
         })
         .catch((error) => {
           console.error("Error fetching CSV data:", error);
