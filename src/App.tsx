@@ -1,5 +1,4 @@
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
-import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -21,9 +20,7 @@ function App() {
             onReset={reset}
           >
             <Header />
-            <React.Suspense fallback={<p>Laster inn resultater...</p>}>
               <StatsTable />
-            </React.Suspense>
             <Footer />
           </ErrorBoundary>
         )}
