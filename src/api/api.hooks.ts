@@ -1,3 +1,4 @@
+import { queryOptions } from "@tanstack/react-query";
 import axios from "axios";
 import { CsvData } from "./api.model";
 
@@ -9,6 +10,11 @@ export const fetchCSVData = async () => {
   return parseCSV(response.data);
 };
 
+export const allPlayerStatsQueryOptions = queryOptions({
+  queryKey: ["stats"],
+  queryFn: fetchCSVData,
+});
+
 function parseCSV(csvText: string): CsvData[] {
   const rows = csvText.split(/\r?\n/);
   const headers = rows[0].split(",") as Array<keyof CsvData>;
@@ -16,7 +22,7 @@ function parseCSV(csvText: string): CsvData[] {
   const data = rows.slice(1).map((row) =>
     row.split(",").reduce((a, v, i) => {
       const key = headers[i];
-      if (key === "Spillernavn") {
+      if (key === "Spillernavn" || key === 'SpillerID') {
         return { ...a, [key]: v };
       }
       return { ...a, [key]: Number(v) };

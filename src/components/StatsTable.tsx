@@ -1,13 +1,12 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { fetchCSVData } from "./api.hooks";
 import React from "react";
+import { CsvData } from "../api/api.model";
 
-const StatsTable = () => {
-  const { data } = useSuspenseQuery({
-    queryKey: ["stats"],
-    queryFn: fetchCSVData,
-  });
+type Props = {
+  data: CsvData[] | undefined;
+  onRowClicked: (spillerId: string) => void;
+};
 
+const StatsTable = ({ data, onRowClicked }: Props) => {
   return (
     <React.Suspense fallback={<p>Laster inn resultater...</p>}>
       <table>
@@ -16,16 +15,14 @@ const StatsTable = () => {
             <th>ID</th>
             <th>Navn</th>
             <th>Totalt</th>
-            <th>s1</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((d) => (
-            <tr key={d.SpillerID}>
+          {data?.map((d) => (
+            <tr onClick={() => onRowClicked(d.SpillerID)} key={d.SpillerID}>
               <td>{d.SpillerID}</td>
               <td>{d.Spillernavn}</td>
-              <td>{d.TotaltPoeng}</td>
-              <td>{d.s1}</td>
+              <td>{d.TotaltPoeng ?? 0}</td>
             </tr>
           ))}
         </tbody>

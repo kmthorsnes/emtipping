@@ -1,5 +1,5 @@
 export interface CsvData {
-  SpillerID: number;
+  SpillerID: string;
   Spillernavn: string;
   TotaltPoeng: number;
   s1: number;
