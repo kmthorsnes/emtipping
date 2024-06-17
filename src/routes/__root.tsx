@@ -1,7 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
