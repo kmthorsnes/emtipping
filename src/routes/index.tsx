@@ -15,11 +15,16 @@ export const Route = createFileRoute("/")({
 
 function IndexPage() {
   const navigate = useNavigate();
-  const { data } = useSuspenseQuery(allPlayerStatsQueryOptions);
+  const { data, isFetching } = useSuspenseQuery(allPlayerStatsQueryOptions);
   return (
     <div>
       <img className="banner" src={Fifa98Banner} />
       <h1 className="fifa-font">EM-tipping 2024</h1>
+      {isFetching && (
+        <p>
+          Venter tålmodig på at ting skal lastes inn fra Kalle sitt excel-ark
+        </p>
+      )}
       <SuspenseWrapper>
         <StatsTable
           data={data}

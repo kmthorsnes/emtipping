@@ -6,23 +6,48 @@ type Props = {
   onRowClicked: (spillerId: string) => void;
 };
 
+type ResultColor = "green" | "yellow" | "red" | "grey";
+
+function getColorFromPoeng(p: number): ResultColor {
+  switch (p) {
+    case 3:
+      return "green";
+    case 1:
+      return "yellow";
+    case 0:
+      return "red";
+    default:
+      return "grey";
+  }
+}
+
 const StatsTable = ({ data, onRowClicked }: Props) => {
   return (
     <React.Suspense fallback={<p>Laster inn resultater...</p>}>
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Navn</th>
+            <th style={{ paddingRight: "1rem" }}>#</th>
+            <th style={{ textAlign: "left" }}>Navn</th>
             <th>Totalt</th>
           </tr>
         </thead>
         <tbody>
-          {data?.map((d) => (
+          {data?.map((d, i) => (
             <tr onClick={() => onRowClicked(d.SpillerID)} key={d.SpillerID}>
-              <td>{d.SpillerID}</td>
-              <td>{d.Spillernavn}</td>
-              <td>{d.TotaltPoeng ?? 0}</td>
+              <td style={{ paddingRight: "1rem" }}>{i + 1}</td>
+              <td style={{ textAlign: "left" }}>{d.Spillernavn}</td>
+              <td>{d.Totalt ?? 0}</td>
+              {d.Runder.map((r, i) => {
+                return (
+                  <td
+                    className={`result ${getColorFromPoeng(r)}`}
+                    key={`statsrow_${i}`}
+                  >
+                    {r}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>

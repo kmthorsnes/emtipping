@@ -1,10 +1,8 @@
 export interface CsvData {
   SpillerID: string;
   Spillernavn: string;
-  TotaltPoeng: number;
-  s1: number;
-  s2: number;
-  s3: number;
+  Totalt: number;
+  Runder: number[];
 }
 
-export type SortableCsv = Pick<CsvData, "SpillerID" | "TotaltPoeng">;
+export type SortableCsv = Pick<CsvData, "SpillerID" | "Totalt">;

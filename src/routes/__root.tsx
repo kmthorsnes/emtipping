@@ -13,7 +13,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function Layout() {
   return (
     <div className="layout">
-      <Header />
+     {/*  <Header /> */}
       <Outlet />
       <Footer />
     </div>

@@ -16,7 +16,7 @@ function PlayerDetails() {
   return (
     <div>
       <h1>Scores: {spiller?.Spillernavn}</h1>
-      <p>Totalt: {spiller?.TotaltPoeng}</p>
+      <p>Totalt: {spiller?.Totalt}</p>
       <p>Her kommer det mer</p>
     </div>
   );

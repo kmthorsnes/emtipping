@@ -1,6 +1,6 @@
 @import url(./fonts/fonts.css);
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -83,6 +83,7 @@ table {
 
 footer {
   margin-top: auto;
+  padding-top: 2rem;
 }
 
 /* HEADER STUFF */
@@ -100,4 +101,21 @@ footer {
   list-style-type: none;
   display: flex;
   gap: 2rem;
+}
+
+/* TABLE STUFF */
+
+.result {
+  &.red {
+    color: red;
+  }
+  &.yellow {
+    color: yellow;
+  }
+  &.green {
+    color: green;
+  }
+  &.grey {
+    color: grey;
+  }
 }
