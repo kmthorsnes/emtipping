@@ -42,6 +42,9 @@ function parseCSV(csvText: string): CsvData[] {
   return data;
 }
 
+/**
+ * @description returnerer true hvis en kolonne-header starter med s1, s2...sN
+ */
 function matchesRoundCol(col: string): boolean {
   const regex = /^[s]{1}\d/g;
   return regex.test(col);
