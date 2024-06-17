@@ -1,7 +1,4 @@
-import {
-    QueryErrorResetBoundary
-} from "@tanstack/react-query";
-import { Suspense } from "react";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -19,9 +16,7 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => {
             </div>
           )}
         >
-          <Suspense fallback={<h1>Laster inn greier...</h1>}>
-            {children}
-          </Suspense>
+          {children}
         </ErrorBoundary>
       )}
     </QueryErrorResetBoundary>
