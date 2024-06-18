@@ -1,5 +1,6 @@
 import React from "react";
 import { CsvData } from "../api/api.model";
+import MatchStatsPopover from "./MatchPopover";
 
 type Props = {
   data: CsvData[] | undefined;
@@ -30,6 +31,21 @@ const StatsTable = ({ data, onRowClicked }: Props) => {
             <th style={{ paddingRight: "1rem" }}>#</th>
             <th style={{ textAlign: "left" }}>Navn</th>
             <th>Totalt</th>
+            {data &&
+              data[0].Runder.map((_, i) => {
+                const matchId = `statstable_th_${i}`;
+                return (
+                  <th key={matchId}>
+                    <button
+                      popoverTarget={matchId}
+                      popoverTargetAction="toggle"
+                    >
+                      {i + 1}
+                    </button>
+                    <MatchStatsPopover id={matchId} matchIdx={i} />
+                  </th>
+                );
+              })}
           </tr>
         </thead>
         <tbody>
