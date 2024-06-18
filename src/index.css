@@ -12,6 +12,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --yellow: yellow;
+  --red: red;
+  --green: green;
+  --grey: grey;
 }
 
 body {
@@ -60,6 +65,10 @@ table {
   :root {
     color: #213547;
     background-color: #ffffff;
+    --yellow: #a39600;
+    --red: #eb0000;
+    --green: #068906;
+    --grey: #707070;
   }
   a:hover {
     color: #747bff;
@@ -107,15 +116,15 @@ footer {
 
 .result {
   &.red {
-    color: red;
+    color: var(--red);
   }
   &.yellow {
-    color: yellow;
+    color: var(--yellow);
   }
   &.green {
-    color: green;
+    color: var(--green);
   }
   &.grey {
-    color: grey;
+    color: var(--grey);
   }
 }
