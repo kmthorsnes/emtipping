@@ -22,7 +22,7 @@ function IndexPage() {
       <h1 className="fifa-font">EM-tipping 2024</h1>
       {isFetching ? (
         <div>
-          Venter tålmodig på at ting skal lastes inn fra det eminente sitt excel-arket ...
+          Venter tålmodig på at ting skal lastes inn fra det eminente excel-arket ...
           <BYMELDINGSPINNER />
         </div>
       ) : (
