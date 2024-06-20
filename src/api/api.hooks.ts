@@ -25,8 +25,7 @@ function parseCSV(csvText: string): CsvData[] {
       if (key === "Spillernavn" || key === "SpillerID") {
         return { ...a, [key]: v };
       }
-      // @ts-expect-error: Siden kolonnen api har header Totalt poeng (to ord) var den ikke så lett å hanskes med i parsinga
-      if (key === "Totalt poeng") {
+      if (key === "Totalt") {
         return { ...a, Totalt: Number(v) };
       }
       if (matchesRoundCol(key)) {
@@ -36,7 +35,6 @@ function parseCSV(csvText: string): CsvData[] {
         }
       }
       return { ...a };
-      //return { ...a, [key]: Number(v) };
     }, {} as CsvData)
   );
   return data;
